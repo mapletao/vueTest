@@ -1,35 +1,47 @@
 <template>
   <div id="app">
-
+    {{parentMsg}}
     <childTest1 :msg="msg" ref="childTest1" @changeMsg="setMsg"/>
+    <ChildTest2 />
   </div>
 </template>
 
 <script>
-import childTest1 from './components/childTest1'
+import ChildTest1 from './components/ChildTest1'
+import ChildTest2 from './components/ChildTest2'
+import ChildTestBus from './bus/ChildTest'
 
 export default {
   name: 'App',
   data () {
     return {
+      parentMsg: 'parent init msg',
       msg: 'data from parent'
     }
   },
   created () {
+    ChildTestBus.$on('changeMsg', val => this.setParentMsg(val))
     // 无效
     this.$refs.childTest1.setMsgTest2('refs set msg test')
   },
   mounted () {
     this.$refs.childTest1.setMsgTest2('refs set msg test')
   },
+  destrory () {
+    ChildTestBus.$off('changeMsg')
+  },
   methods: {
+    setParentMsg (val) {
+      this.parentMsg = val
+    },
     setMsg (val) {
       this.msg = val
     }
 
   },
   components: {
-    childTest1
+    ChildTest1,
+    ChildTest2
   }
 }
 </script>
