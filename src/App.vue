@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <childTest1 :msg="msg"/>
+
+    <childTest1 :msg="msg" ref="childTest1" @changeMsg="setMsg"/>
   </div>
 </template>
 
@@ -14,7 +15,17 @@ export default {
       msg: 'data from parent'
     }
   },
+  created () {
+    // 无效
+    this.$refs.childTest1.setMsgTest2('refs set msg test')
+  },
+  mounted () {
+    this.$refs.childTest1.setMsgTest2('refs set msg test')
+  },
   methods: {
+    setMsg (val) {
+      this.msg = val
+    }
 
   },
   components: {
