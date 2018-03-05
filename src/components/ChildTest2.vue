@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <h2>childTest2 component</h2>
     <p style="color: blue">{{msgTest2}}</p>
     <button @click="changeMsg">changeMsgFromTest2</button>
   </div>
@@ -24,5 +25,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 </style>
