@@ -3,6 +3,7 @@
     {{parentMsg}}
     <childTest1 :msg="msg" ref="childTest1" @changeMsg="setMsg"/>
     <ChildTest2 />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
   created () {
     ChildTestBus.$on('changeMsg', val => this.setParentMsg(val))
     // 无效
-    this.$refs.childTest1.setMsgTest2('refs set msg test')
+    // this.$refs.childTest1.setMsgTest2('refs set msg test')
   },
   mounted () {
     this.$refs.childTest1.setMsgTest2('refs set msg test')
